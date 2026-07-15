@@ -12,7 +12,7 @@ export default {
            Superficies oscuras → 'primary' (la paleta nueva no tiene navy).
            Texto base → 'ink' (#1E1A17). Hover del dorado → 'gold-deep'. */
         primary: '#12377B',       // Azul institucional (color base)
-        gold: '#E6AD09',          // Dorado (acento)
+        gold: '#E6AD09',          // Dorado institucional (acento)
         'gold-deep': '#C49308',   // Dorado oscuro (hover del dorado, derivado)
         'gold-bright': '#FDF107', // Amarillo vivo (solo degradados)
         ink: '#1E1A17',           // Casi negro cálido (texto base)

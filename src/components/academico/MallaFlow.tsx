@@ -25,6 +25,8 @@ import {
 
 
 // ── Nodo de curso (colores por área, definidos por el usuario) ───────────────
+// El área se codifica con una franja lateral de color; el fondo es blanco en
+// reposo y se tiñe con el color del área al pasar el puntero.
 const AREA_STYLES: Record<AreaType, string> = {
   general: 'border-l-emerald-500 bg-white text-emerald-950 hover:bg-emerald-100/70',
   especifico: 'border-l-orange-400 bg-white text-orange-950 hover:bg-orange-100/70',
@@ -358,7 +360,7 @@ export default function MallaFlow() {
 
       {/* Modal solo en móvil/tablet (sin panel lateral) */}
       {!isDesktop && selectedCourse && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4" role="dialog" aria-modal="true">
+        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-label={`Detalle del curso: ${selectedCourse.name}`}>
           <button
             type="button"
             aria-label="Cerrar detalle"

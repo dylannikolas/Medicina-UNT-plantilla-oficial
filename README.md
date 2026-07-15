@@ -79,6 +79,8 @@ El modelo habitual del equipo es más simple: cada quien edita directamente
 
 Son **globales** (iguales para todas las escuelas) y están en
 **`tailwind.config.js`**: `primary` (azul) y `gold` (dorado), entre otros tokens.
+Para **texto** dorado sobre fondos claros usa `gold-ink` (dorado oscuro que sí
+cumple contraste AA); reserva `gold` para el logotipo, íconos, rellenos y bordes.
 Si una escuela necesita otra paleta, se ajustan ahí.
 
 ## Despliegue
@@ -96,4 +98,3 @@ El destino del build se decide en `vite.config.ts`:
 - En `config/navigation.ts` puedes cambiar **etiquetas** del menú, no las **rutas**
   (las define el router en `src/router`).
 - Mantén `npm run typecheck` y `npm run lint` en verde antes de publicar.
-# Medicina-UNT-plantilla-oficial
