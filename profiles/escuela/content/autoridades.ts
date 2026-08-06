@@ -24,17 +24,43 @@ export const coordinadores = [
   }
 ];
 
-// Estructura según el Estatuto UNT vigente (2021, pág. 18): una Facultad se
-// compone de Escuela Profesional, Departamentos Académicos, Unidad de Segunda
-// Especialidad, Unidad de Investigación y Unidad de Posgrado.
+// Estructura organizacional de la Facultad de Medicina – UNT
+// Según el Estatuto UNT vigente y la estructura oficial de la Facultad.
 export const organigrama = {
-  nombre: "Facultad",
-  cargo: "Decano(a)",
+  nombre: "Consejo de Facultad",
+  cargo: "",
   hijos: [
-    { nombre: "Escuela Profesional", cargo: "Director(a) de Escuela" },
-    { nombre: "Departamentos Académicos", cargo: "Jefe(s) de Departamento" },
-    { nombre: "Unidad de Segunda Especialidad", cargo: "" },
-    { nombre: "Unidad de Investigación", cargo: "" },
-    { nombre: "Unidad de Posgrado", cargo: "" }
+    {
+      nombre: "Decanato",
+      cargo: "",
+      hijos: [
+        // ── Órganos de soporte y asesoría (nivel intermedio) ──
+        { nombre: "Dirección de Escuela de Medicina", cargo: "" },
+        { nombre: "Administración", cargo: "" },
+        { nombre: "Dirección de Segunda Especialización en Ciencias Médicas", cargo: "" },
+        { nombre: "Comités Permanentes", cargo: "" },
+
+        // ── Unidades dependientes (nivel inferior / línea) ──
+        { nombre: "Unidad de Posgrado", cargo: "" },
+        { nombre: "Unidad de Investigación", cargo: "" },
+        { nombre: "Unidad de Segunda Especialización", cargo: "" },
+        { nombre: "Escuela Profesional", cargo: "Director(a) de Escuela" },
+        { nombre: "Institutos de Investigación", cargo: "" },
+        {
+          nombre: "Departamentos Académicos",
+          cargo: "Jefe(s) de Departamento",
+          hijos: [
+            { nombre: "Ciencias Básicas Médicas", cargo: "" },
+            { nombre: "Cirugía", cargo: "" },
+            { nombre: "Fisiología Humana", cargo: "" },
+            { nombre: "Ginecología y Obstetricia", cargo: "" },
+            { nombre: "Medicina", cargo: "" },
+            { nombre: "Medicina Preventiva y Salud Pública", cargo: "" },
+            { nombre: "Morfología Humana", cargo: "" },
+            { nombre: "Pediatría", cargo: "" }
+          ]
+        }
+      ]
+    }
   ]
 };
