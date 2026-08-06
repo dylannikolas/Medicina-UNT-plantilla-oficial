@@ -44,6 +44,7 @@ const Movilidad = lazy(() => import('../pages/academico/Movilidad'));
 
 // Páginas reutilizadas
 const Docentes = lazy(() => import('../pages/autoridades/Docentes'));       // Organización › Docentes
+const Administrativos = lazy(() => import('../pages/autoridades/Administrativos')); // Organización › Administrativos
 const Organigrama = lazy(() => import('../pages/autoridades/Organigrama')); // Organización › Estructura organizacional
 
 // Módulo: Admisión (enlazado desde el panel lateral)
@@ -87,7 +88,7 @@ export default function AppRouter() {
               <Route path="direccion" element={<OrganizacionDireccion />} />
               <Route path="organos-gobierno" element={<OrganosGobierno />} />
               <Route path="docentes" element={<Docentes />} />
-              <Route path="administrativos" element={<EnConstruccion titulo="Administrativos" />} />
+              <Route path="administrativos" element={<Administrativos />} />
               <Route path="comites" element={<Comites />} />
               <Route path="estructura" element={<Organigrama />} />
             </Route>
