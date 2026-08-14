@@ -36,8 +36,8 @@ interface OrgData {
   level: number;
 }
 
-const NODE_W = 240;
-const NODE_H = 96;
+const NODE_W = 280;
+const NODE_H = 100;
 
 // ReactFlow exige color literal en JS (no acepta clases de Tailwind). Estas
 // constantes son el espejo de los tokens: `primary` de tailwind.config.js y el
@@ -45,23 +45,39 @@ const NODE_H = 96;
 const EDGE_COLOR = 'rgba(18,55,123,0.25)'; // primary @ 25%
 const GRID_COLOR = '#cbd5e1'; // slate-300
 
-// ── Nodo on‑brand: raíz en azul (cargo dorado); resto blanco con franja superior ──
+// ── Nodo on‑brand con estilos diferenciados por nivel jerárquico ──
 function OrgNode({ data }: NodeProps<OrgData>) {
-  const isRoot = data.level === 0;
-  return (
-    <div
-      className={`relative w-60 px-4 py-3 rounded-xl shadow-lg border text-center overflow-hidden ${
-        isRoot ? 'bg-primary text-white border-transparent ring-4 ring-primary/10' : 'bg-white border-gray-100'
-      }`}
-    >
-      <Handle type="target" position={Position.Top} className="!opacity-0" />
-      {!isRoot && <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary to-gold" />}
+  const { level } = data;
+  // Nivel 0 = Consejo de Facultad, Nivel 1 = Decanato, Nivel 2 = unidades, Nivel 3+ = sub-departamentos
+  const isRoot = level === 0;
+  const isDecanato = level === 1;
+  const isSubDept = level >= 3;
 
-      <h4 className={`font-display font-bold leading-tight ${isRoot ? 'text-white text-base' : 'text-primary text-sm'}`}>
+  let containerClasses = 'relative w-[280px] px-4 py-3 rounded-xl shadow-lg border text-center overflow-hidden';
+  if (isRoot) {
+    containerClasses += ' bg-primary text-white border-transparent ring-4 ring-primary/10';
+  } else if (isDecanato) {
+    containerClasses += ' bg-primary/90 text-white border-transparent ring-2 ring-primary/20';
+  } else if (isSubDept) {
+    containerClasses += ' bg-slate-50 border-slate-200';
+  } else {
+    containerClasses += ' bg-white border-gray-100';
+  }
+
+  return (
+    <div className={containerClasses}>
+      <Handle type="target" position={Position.Top} className="!opacity-0" />
+      {!isRoot && !isDecanato && <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary to-gold" />}
+
+      <h4 className={`font-display font-bold leading-tight ${
+        isRoot || isDecanato ? 'text-white text-base' : isSubDept ? 'text-slate-700 text-xs' : 'text-primary text-sm'
+      }`}>
         {data.nombre}
       </h4>
       {data.cargo && (
-        <p className={`text-[11px] mt-1.5 font-semibold uppercase tracking-wide ${isRoot ? 'text-gold' : 'text-gray-500'}`}>
+        <p className={`text-[11px] mt-1.5 font-semibold uppercase tracking-wide ${
+          isRoot || isDecanato ? 'text-gold' : 'text-gray-500'
+        }`}>
           {data.cargo}
         </p>
       )}
@@ -101,7 +117,7 @@ function buildGraph(root: NodoOrg) {
 // dagre posiciona (TB, de arriba‑abajo) y devuelve centros: los paso a top‑left.
 function layout(nodes: Node<OrgData>[], edges: Edge[]): Node<OrgData>[] {
   const g = new dagre.graphlib.Graph();
-  g.setGraph({ rankdir: 'TB', nodesep: 40, ranksep: 70, marginx: 24, marginy: 24 });
+  g.setGraph({ rankdir: 'TB', nodesep: 50, ranksep: 80, marginx: 32, marginy: 32 });
   g.setDefaultEdgeLabel(() => ({}));
 
   nodes.forEach((n) => g.setNode(n.id, { width: NODE_W, height: NODE_H }));
@@ -151,7 +167,7 @@ export default function OrganigramaFlow() {
 
       <div
         aria-hidden="true"
-        className="relative w-full h-[60svh] min-h-[420px] md:h-[560px] rounded-xl border border-slate-200 overflow-hidden shadow-sm bg-slate-50"
+        className="relative w-full h-[75svh] min-h-[520px] md:h-[700px] rounded-xl border border-slate-200 overflow-hidden shadow-sm bg-slate-50"
       >
         <ReactFlow
           nodes={nodes}

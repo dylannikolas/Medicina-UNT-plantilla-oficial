@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { User, Check } from 'lucide-react';
+import { User, Check, FlaskConical, BadgeCheck } from 'lucide-react';
 
 /**
  * DocenteCard — Tarjeta con volteo 3D (flip).
@@ -15,6 +15,9 @@ interface Docente {
   cursoPrincipal: string;
   foto?: string | null;
   especialidades?: string[];
+  investigador?: boolean;
+  categoriaInvestigacion?: string | null;
+  condicion?: string | null;
 }
 
 export default function DocenteCard({ docente }: { docente: Docente }) {
@@ -37,7 +40,7 @@ export default function DocenteCard({ docente }: { docente: Docente }) {
         {/* ── FRENTE ── */}
         <div className="absolute inset-0 [backface-visibility:hidden] bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col">
           {/* Franja superior con avatar */}
-          <div className="relative bg-gradient-to-br from-primary to-primary pt-8 pb-12 flex justify-center items-end shrink-0">
+          <div className="relative bg-primary pt-8 pb-12 flex justify-center items-end shrink-0">
             <div className="absolute inset-0 opacity-[0.06]"
               style={{ backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)', backgroundSize: '16px 16px' }}
             />
@@ -69,7 +72,7 @@ export default function DocenteCard({ docente }: { docente: Docente }) {
         </div>
 
         {/* ── REVERSO ── */}
-        <div className="absolute inset-0 [transform:rotateY(180deg)] [backface-visibility:hidden] bg-gradient-to-br from-primary to-primary rounded-2xl shadow-lg overflow-hidden flex flex-col p-5 text-white">
+        <div className="absolute inset-0 [transform:rotateY(180deg)] [backface-visibility:hidden] bg-primary rounded-2xl shadow-lg overflow-hidden flex flex-col p-5 text-white">
           <div className="text-center shrink-0">
             <p className="text-gold text-[10px] font-black uppercase tracking-[0.2em]">
               {docente.grado}
@@ -77,6 +80,30 @@ export default function DocenteCard({ docente }: { docente: Docente }) {
             <h4 className="font-display font-bold text-sm leading-tight mt-1">
               {docente.nombre}
             </h4>
+
+            {/* Etiquetas: condición (nombrado/contratado), investigador y su categoría */}
+            {(docente.condicion || docente.investigador) && (
+              <div className="flex flex-wrap justify-center gap-1.5 mt-2.5">
+                {docente.condicion && (
+                  <span className="inline-flex items-center gap-1 rounded-full bg-white/15 border border-white/25 text-white text-[9px] font-black uppercase tracking-wide px-2 py-0.5">
+                    <BadgeCheck className="w-3 h-3" aria-hidden="true" />
+                    {docente.condicion}
+                  </span>
+                )}
+                {docente.investigador && (
+                  <span className="inline-flex items-center gap-1 rounded-full bg-gold text-primary text-[9px] font-black uppercase tracking-wide px-2 py-0.5">
+                    <FlaskConical className="w-3 h-3" aria-hidden="true" />
+                    Investigador
+                  </span>
+                )}
+                {docente.investigador && docente.categoriaInvestigacion && (
+                  <span className="inline-flex items-center gap-1 rounded-full bg-white/10 border border-gold/40 text-gold text-[9px] font-bold px-2 py-0.5">
+                    {docente.categoriaInvestigacion}
+                  </span>
+                )}
+              </div>
+            )}
+
             <div className="border-t border-white/20 my-3" />
             <p className="text-gold text-[10px] font-black uppercase tracking-[0.18em] mb-2">
               Especialidades

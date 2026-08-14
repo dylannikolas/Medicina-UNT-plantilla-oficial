@@ -24,11 +24,18 @@ const Objetivos = lazy(() => import("../pages/nosotros/Objetivos")); // educativ
 const Perfiles = lazy(() => import("../pages/nosotros/Perfiles")); // ingreso + egreso
 
 // Módulo: Organización
+<<<<<<< HEAD
 const OrganizacionIndex = lazy(() => import("../pages/organizacion/index"));
 const OrganizacionDireccion = lazy(
   () => import("../pages/organizacion/Direccion"),
 ); // escuela + departamento
 const Comites = lazy(() => import("../pages/organizacion/Comites")); // los 5 comités
+=======
+const OrganizacionIndex = lazy(() => import('../pages/organizacion/index'));
+const OrganizacionDireccion = lazy(() => import('../pages/organizacion/Direccion')); // escuela + departamento
+const OrganosGobierno = lazy(() => import('../pages/organizacion/OrganosGobierno')); // consejo de facultad + consejeros + representantes
+const Comites = lazy(() => import('../pages/organizacion/Comites'));                 // los 5 comités
+>>>>>>> 21767f0898c29971e58ba464da4ba1a40e3908ed
 
 // Módulo: Académico
 const AcademicoIndex = lazy(() => import("../pages/academico/index"));
@@ -51,12 +58,23 @@ const ResponsabilidadSocial = lazy(
 );
 
 // Páginas reutilizadas
+<<<<<<< HEAD
 const Docentes = lazy(() => import("../pages/autoridades/Docentes")); // Organización › Docentes
 const Organigrama = lazy(() => import("../pages/autoridades/Organigrama")); // Organización › Estructura organizacional
 
 // Módulo: Admisión (enlazado desde el panel lateral)
 const GuiaPostulante = lazy(() => import("../pages/admision/GuiaPostulante"));
 const Resoluciones = lazy(() => import("../pages/admision/Resoluciones"));
+=======
+const Docentes = lazy(() => import('../pages/autoridades/Docentes'));       // Organización › Docentes
+const Administrativos = lazy(() => import('../pages/autoridades/Administrativos')); // Organización › Administrativos
+const Organigrama = lazy(() => import('../pages/autoridades/Organigrama')); // Organización › Estructura organizacional
+
+// Módulo: Admisión (enlazado desde el panel lateral)
+const GuiaPostulante = lazy(() => import('../pages/admision/GuiaPostulante'));
+const Resoluciones = lazy(() => import('../pages/admision/Resoluciones'));
+const GestionFormacionPregrado = lazy(() => import('../pages/admision/GestionFormacionPregrado'));
+>>>>>>> 21767f0898c29971e58ba464da4ba1a40e3908ed
 
 // Fallback mientras llega el chunk de la ruta. Reserva alto para evitar saltos.
 function RouteFallback() {
@@ -94,6 +112,7 @@ export default function AppRouter() {
                 <Route path="mision-vision" element={<MisionVision />} />
               </Route>
 
+<<<<<<< HEAD
               {/* ── Organización ── */}
               <Route path="/organizacion" element={<OrganizacionIndex />}>
                 <Route index element={<OrganizacionDireccion />} />
@@ -106,6 +125,18 @@ export default function AppRouter() {
                 <Route path="comites" element={<Comites />} />
                 <Route path="estructura" element={<Organigrama />} />
               </Route>
+=======
+            {/* ── Organización ── */}
+            <Route path="/organizacion" element={<OrganizacionIndex />}>
+              <Route index element={<OrganizacionDireccion />} />
+              <Route path="direccion" element={<OrganizacionDireccion />} />
+              <Route path="organos-gobierno" element={<OrganosGobierno />} />
+              <Route path="docentes" element={<Docentes />} />
+              <Route path="administrativos" element={<Administrativos />} />
+              <Route path="comites" element={<Comites />} />
+              <Route path="estructura" element={<Organigrama />} />
+            </Route>
+>>>>>>> 21767f0898c29971e58ba464da4ba1a40e3908ed
 
               {/* ── Académico ── */}
               <Route path="/academico" element={<AcademicoIndex />}>
@@ -141,9 +172,16 @@ export default function AppRouter() {
                 <Route path="proyectos" element={<ProyectosGrupo />} />
               </Route>
 
+<<<<<<< HEAD
               {/* ── Admisión (panel lateral) ── */}
               <Route path="/admision/guia" element={<GuiaPostulante />} />
               <Route path="/admision/resoluciones" element={<Resoluciones />} />
+=======
+            {/* ── Admisión (panel lateral) ── */}
+            <Route path="/admision/guia" element={<GuiaPostulante />} />
+            <Route path="/admision/resoluciones" element={<Resoluciones />} />
+            <Route path="/admision/gestion-formacion-pregrado" element={<GestionFormacionPregrado />} />
+>>>>>>> 21767f0898c29971e58ba464da4ba1a40e3908ed
 
               {/* Conservadas fuera del menú */}
               <Route path="/noticias" element={<Noticias />} />
