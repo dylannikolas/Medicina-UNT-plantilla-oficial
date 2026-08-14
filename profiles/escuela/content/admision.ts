@@ -15,32 +15,54 @@ export interface InfoUtilItem {
 
 export const modalidadesAdmision: ModalidadAdmision[] = [
   {
-    titulo: 'Modalidad de ingreso 1',
-    dirigidoA: 'A quién está dirigida esta modalidad.',
-    vacantes: 'Aprox. 00 vacantes',
-    descripcion: 'Descripción breve de la primera modalidad de ingreso.',
+    titulo: "Examen ordinario",
+    dirigidoA: "Publico en general",
+    vacantes: "Aprox. 24 vacantes",
+    descripcion: "Modalidad de ingreso para el público en general.",
   },
   {
-    titulo: 'Modalidad de ingreso 2',
-    dirigidoA: 'A quién está dirigida esta modalidad.',
-    vacantes: 'Aprox. 00 vacantes',
-    descripcion: 'Descripción breve de la segunda modalidad de ingreso.',
+    titulo: "CEPUNT",
+    dirigidoA: "Estudiantes de CEPUNT",
+    vacantes: "Aprox. 18 vacantes",
+    descripcion:
+      "Modalidad de ingreso para estudiantes del centro preuniversitario.",
   },
   {
-    titulo: 'Modalidad de ingreso 3',
-    dirigidoA: 'A quién está dirigida esta modalidad.',
-    vacantes: 'Aprox. 00 vacantes',
-    descripcion: 'Descripción breve de la tercera modalidad de ingreso.',
+    titulo: "Personas con discapacidad",
+    dirigidoA: "A personas con discapacidad.",
+    vacantes: "Aprox. 02 vacantes",
+    descripcion: "Modalidad de ingreso para personas con discapacidad.",
+  },
+  {
+    titulo: "Quinto de secundaria",
+    dirigidoA: "A estudiantes de quinto de secundaria.",
+    vacantes: "Aprox. 03 vacantes",
+    descripcion:
+      "Modalidad de ingreso para estudiantes de quinto de secundaria.",
+  },
+  {
+    titulo: "Premios de excelencia",
+    dirigidoA: "A estudiantes con mérito académico.",
+    vacantes: "Aprox. 04 vacantes",
+    descripcion: "Modalidad de ingreso para estudiantes con mérito académico.",
   },
 ];
 
 export const infoUtilAdmision: InfoUtilItem[] = [
-  { titulo: 'Requisitos', detalle: 'Documentos que debe presentar el postulante.' },
-  { titulo: 'Fechas', detalle: 'Periodos o meses en que se realizan los exámenes de admisión.' },
+  {
+    titulo: "Requisitos",
+    detalle:
+      "Al precenstarse al examen de admisión, el postulante debe cumplir con los requisitos establecidos por la universidad.",
+  },
+  {
+    titulo: "Fechas",
+    detalle:
+      "Las fechas de inscripción y examen de admisión se publicarán en el portal oficial de la universidad.",
+  },
 ];
 
 // Botón inferior: portal oficial de admisión de la universidad.
 export const portalAdmision = {
-  label: 'Portal de Admisión',
-  url: '#',
+  label: "Portal de Admisión",
+  url: "https://www.admisionunt.info/",
 };

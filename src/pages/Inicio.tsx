@@ -1,14 +1,21 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import PageWrapper from '../components/layout/PageWrapper';
-import { SectionTitle } from '../components/ui/SectionTitle';
-import { Card } from '../components/ui/Card';
-import { GraduationCap, ArrowRight, Calendar, ShieldCheck, User, Play } from 'lucide-react';
-import { site, branding } from '@/profile';
-import { noticias } from '@profile/content/noticias';
-import { accesosRapidos, ambientes } from '@profile/content/home';
-import useHeaderHeight from '../hooks/useHeaderHeight';
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import PageWrapper from "../components/layout/PageWrapper";
+import { SectionTitle } from "../components/ui/SectionTitle";
+import { Card } from "../components/ui/Card";
+import {
+  GraduationCap,
+  ArrowRight,
+  Calendar,
+  ShieldCheck,
+  User,
+  Play,
+} from "lucide-react";
+import { site, branding } from "@/profile";
+import { noticias } from "@profile/content/noticias";
+import { accesosRapidos, ambientes } from "@profile/content/home";
+import useHeaderHeight from "../hooks/useHeaderHeight";
 
 export default function Inicio() {
   // Alto del header sticky (varía con el banner de avisos y el responsive).
@@ -27,10 +34,10 @@ export default function Inicio() {
     update();
     const observer = new ResizeObserver(update);
     observer.observe(el);
-    window.addEventListener('resize', update);
+    window.addEventListener("resize", update);
     return () => {
       observer.disconnect();
-      window.removeEventListener('resize', update);
+      window.removeEventListener("resize", update);
     };
   }, []);
 
@@ -40,19 +47,25 @@ export default function Inicio() {
   // Carga progresiva: solo pedimos las imágenes ya mostradas + la siguiente.
   // Así la primera pinta rápido en móvil (mejor LCP) y las demás no compiten
   // con el render inicial; cada una llega antes de su turno en el crossfade.
-  const [loadedImgs, setLoadedImgs] = useState(() => new Set([0, 1 % heroImages.length]));
+  const [loadedImgs, setLoadedImgs] = useState(
+    () => new Set([0, 1 % heroImages.length]),
+  );
 
   useEffect(() => {
     if (heroImages.length < 2) return;
     // Respeta la preferencia del sistema de reducir movimiento: sin auto-rotación.
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const id = setInterval(() => setHeroIdx((i) => (i + 1) % heroImages.length), 6000);
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = setInterval(
+      () => setHeroIdx((i) => (i + 1) % heroImages.length),
+      6000,
+    );
     return () => clearInterval(id);
   }, [heroImages.length]);
 
   useEffect(() => {
     setLoadedImgs((prev) => {
-      if (prev.has(heroIdx) && prev.has((heroIdx + 1) % heroImages.length)) return prev;
+      if (prev.has(heroIdx) && prev.has((heroIdx + 1) % heroImages.length))
+        return prev;
       const next = new Set(prev);
       next.add(heroIdx);
       next.add((heroIdx + 1) % heroImages.length);
@@ -62,11 +75,11 @@ export default function Inicio() {
 
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.18 } }
+    visible: { opacity: 1, transition: { staggerChildren: 0.18 } },
   };
   const itemVariants = {
     hidden: { opacity: 0, y: 24 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   };
 
   // Accesos rápidos, ambientes y cifras: contenido del perfil activo.
@@ -79,7 +92,9 @@ export default function Inicio() {
           ══════════════════════════════════════════ */}
       <section
         className="relative overflow-hidden text-white flex items-center"
-        style={{ minHeight: `max(420px, calc(100svh - ${headerHeight}px - ${cifrasHeight}px))` }}
+        style={{
+          minHeight: `max(420px, calc(100svh - ${headerHeight}px - ${cifrasHeight}px))`,
+        }}
       >
         {/* Carrusel de fondo: capas <img> con composición en GPU para que el
             navegador no repinte la imagen en cada scroll (clave en Firefox
@@ -93,16 +108,20 @@ export default function Inicio() {
               alt=""
               aria-hidden="true"
               decoding="async"
-              loading={i === 0 ? 'eager' : 'lazy'}
+              loading={i === 0 ? "eager" : "lazy"}
               className="absolute inset-0 z-0 w-full h-full object-cover object-center transition-opacity duration-[1500ms] ease-in-out transform-gpu"
-              style={{ opacity: i === heroIdx ? 1 : 0, willChange: 'opacity' }}
+              style={{ opacity: i === heroIdx ? 1 : 0, willChange: "opacity" }}
             />
-          ) : null
+          ) : null,
         )}
 
         {/* Degradado institucional azul + máscara negra semitransparente encima */}
-        <div className="absolute inset-0 z-[1]"
-          style={{ background: 'linear-gradient(110deg, rgba(18,55,123,0.05) 0%, rgba(18,55,123,0.52) 42%, rgba(18,55,123,0.78) 70%, rgba(18,55,123,0.88) 100%)' }}
+        <div
+          className="absolute inset-0 z-[1]"
+          style={{
+            background:
+              "linear-gradient(110deg, rgba(18,55,123,0.05) 0%, rgba(18,55,123,0.52) 42%, rgba(18,55,123,0.78) 70%, rgba(18,55,123,0.88) 100%)",
+          }}
         />
         <div className="absolute inset-0 z-[1] bg-black/40 md:bg-black/30" />
 
@@ -111,7 +130,11 @@ export default function Inicio() {
         <div
           aria-hidden="true"
           className="absolute inset-0 z-[2] opacity-[0.04]"
-          style={{ backgroundImage: 'radial-gradient(rgba(255,255,255,1) 1.5px, transparent 1.5px)', backgroundSize: '28px 28px' }}
+          style={{
+            backgroundImage:
+              "radial-gradient(rgba(255,255,255,1) 1.5px, transparent 1.5px)",
+            backgroundSize: "28px 28px",
+          }}
         />
 
         {/* Acento naranja diagonal en la derecha */}
@@ -127,7 +150,7 @@ export default function Inicio() {
             <motion.p
               variants={itemVariants}
               className="text-sm md:text-lg font-display font-semibold text-white/80 uppercase tracking-widest mb-2"
-              style={{ textShadow: '0 2px 12px rgba(0,0,0,0.4)' }}
+              style={{ textShadow: "0 2px 12px rgba(0,0,0,0.4)" }}
             >
               {site.hero.eyebrow}
             </motion.p>
@@ -135,9 +158,13 @@ export default function Inicio() {
             <motion.h1
               variants={itemVariants}
               className="font-display font-black leading-[0.95] mb-4 text-white"
-              style={{ fontSize: 'clamp(2.5rem, 8vw, 6rem)', textShadow: '0 8px 32px rgba(0,0,0,0.4)' }}
+              style={{
+                fontSize: "clamp(2.5rem, 8vw, 6rem)",
+                textShadow: "0 8px 32px rgba(0,0,0,0.4)",
+              }}
             >
-              {site.hero.titulo.linea1}<br />
+              {site.hero.titulo.linea1}
+              <br />
               <span className="text-gold">{site.hero.titulo.linea2}</span>
             </motion.h1>
 
@@ -154,7 +181,10 @@ export default function Inicio() {
             >
               <Link to={site.hero.ctas.primary.to} className="w-full sm:w-auto">
                 <motion.button
-                  whileHover={{ scale: 1.04, boxShadow: '0 0 32px rgba(230,173,9,0.5)' }}
+                  whileHover={{
+                    scale: 1.04,
+                    boxShadow: "0 0 32px rgba(230,173,9,0.5)",
+                  }}
                   whileTap={{ scale: 0.97 }}
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gold hover:bg-gold-deep text-white font-black px-6 py-3 sm:px-7 sm:py-3.5 rounded-xl text-sm sm:text-base transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
                 >
@@ -162,7 +192,10 @@ export default function Inicio() {
                   {site.hero.ctas.primary.label}
                 </motion.button>
               </Link>
-              <Link to={site.hero.ctas.secondary.to} className="w-full sm:w-auto">
+              <Link
+                to={site.hero.ctas.secondary.to}
+                className="w-full sm:w-auto"
+              >
                 <motion.button
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
@@ -176,7 +209,10 @@ export default function Inicio() {
 
             {/* Sello de acreditación (definido en site.acreditacion del perfil). */}
             {site.acreditacion.mostrarSello && (
-              <motion.div variants={itemVariants} className="mt-6 flex justify-center md:justify-end">
+              <motion.div
+                variants={itemVariants}
+                className="mt-6 flex justify-center md:justify-end"
+              >
                 <span className="inline-flex items-center gap-2 rounded-full bg-gold/15 border border-gold/30 px-3 py-1.5 text-xs sm:text-sm font-semibold text-white backdrop-blur-sm">
                   <ShieldCheck className="w-4 h-4 text-gold shrink-0" />
                   {site.acreditacion.texto}
@@ -198,7 +234,11 @@ export default function Inicio() {
                 aria-label="Libro de Reclamaciones (abre en pestaña nueva)"
                 className="pointer-events-auto inline-block rounded transition-transform hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2"
               >
-                <img src={branding.logos.libroReclamaciones} alt="Libro de Reclamaciones" className="w-20 md:w-32 h-auto drop-shadow-md" />
+                <img
+                  src={branding.logos.libroReclamaciones}
+                  alt="Libro de Reclamaciones"
+                  className="w-20 md:w-32 h-auto drop-shadow-md"
+                />
               </a>
 
               {/* Bolsa de trabajo */}
@@ -209,7 +249,11 @@ export default function Inicio() {
                 aria-label="Bolsa de trabajo (abre en pestaña nueva)"
                 className="pointer-events-auto inline-block rounded transition-transform hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2"
               >
-                <img src={branding.logos.bolsaTrabajo} alt={branding.alt.bolsaTrabajo} className="h-[54px] md:h-[87px] w-auto drop-shadow-md" />
+                <img
+                  src={branding.logos.bolsaTrabajo}
+                  alt={branding.alt.bolsaTrabajo}
+                  className="h-[54px] md:h-[87px] w-auto drop-shadow-md"
+                />
               </a>
             </div>
           </div>
@@ -229,13 +273,17 @@ export default function Inicio() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1, duration: 0.5 }}
-                className={`py-5 px-2 sm:py-6 sm:px-4 md:py-8 md:px-6 text-center border-white/10 ${idx < 2 ? 'border-r' : ''}`}
+                className={`py-5 px-2 sm:py-6 sm:px-4 md:py-8 md:px-6 text-center border-white/10 ${idx < 2 ? "border-r" : ""}`}
               >
                 <div className="text-base sm:text-2xl md:text-4xl font-display font-black mb-1 text-gold">
                   {cifra.numero}
                 </div>
-                <p className="text-white font-bold text-xs leading-tight sm:text-sm md:text-base">{cifra.etiqueta}</p>
-                <p className="hidden sm:block text-white/60 text-xs mt-0.5">{cifra.sub}</p>
+                <p className="text-white font-bold text-xs leading-tight sm:text-sm md:text-base">
+                  {cifra.etiqueta}
+                </p>
+                <p className="hidden sm:block text-white/60 text-xs mt-0.5">
+                  {cifra.sub}
+                </p>
               </motion.div>
             ))}
           </div>
@@ -249,16 +297,15 @@ export default function Inicio() {
       <section className="py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4 md:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            
             {/* Columna de Texto */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
               className="flex flex-col"
             >
-              <SectionTitle title="Bienvenida de la **Decana**" />
+              <SectionTitle title="Bienvenida del Director de la Escuela Profesional de Medicina" />
 
               <div className="text-gray-700 font-body space-y-4 leading-relaxed">
                 <p>«{site.decana.mensaje}»</p>
@@ -269,18 +316,18 @@ export default function Inicio() {
             </motion.div>
 
             {/* Columna de Video */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
               className="w-full rounded-xl overflow-hidden shadow-2xl relative border-4 border-gray-50"
-              style={{ paddingTop: '56.25%' }}
+              style={{ paddingTop: "56.25%" }}
             >
               {site.decana.video.youtubeId ? (
                 <iframe
                   className="absolute top-0 left-0 w-full h-full border-0"
-                  src={`https://www.youtube-nocookie.com/embed/${site.decana.video.youtubeId}${site.decana.video.start ? `?start=${site.decana.video.start}` : ''}`}
+                  src={`https://www.youtube-nocookie.com/embed/${site.decana.video.youtubeId}${site.decana.video.start ? `?start=${site.decana.video.start}` : ""}`}
                   title={`Video Institucional · ${site.programa.nombre}`}
                   loading="lazy"
                   referrerPolicy="strict-origin-when-cross-origin"
@@ -292,20 +339,31 @@ export default function Inicio() {
                   {/* Retrato silueta + sello de video: transmite "aquí te da la bienvenida una persona" aun sin datos */}
                   <div className="relative">
                     <div className="w-24 h-24 rounded-full bg-white border border-primary/10 shadow-sm flex items-end justify-center overflow-hidden">
-                      <User className="w-20 h-20 text-primary/20 -mb-1" aria-hidden="true" />
+                      <User
+                        className="w-20 h-20 text-primary/20 -mb-1"
+                        aria-hidden="true"
+                      />
                     </div>
                     <span className="absolute -bottom-1 -right-1 w-9 h-9 rounded-full bg-gold flex items-center justify-center shadow-md">
-                      <Play className="w-4 h-4 text-primary fill-primary translate-x-[1px]" aria-hidden="true" />
+                      <Play
+                        className="w-4 h-4 text-primary fill-primary translate-x-[1px]"
+                        aria-hidden="true"
+                      />
                     </span>
                   </div>
                   <div>
-                    <p className="font-display font-bold text-sm">Mensaje de bienvenida del decano(a)</p>
-                    <p className="text-xs text-primary/80 mt-1">Agrega su foto o el video en el perfil (site.decana.video).</p>
+                    <p className="font-display font-bold text-sm">
+                      Mensaje de bienvenida del Director de la Escuela
+                      Profesional de Medicina
+                    </p>
+                    <p className="text-xs text-primary/80 mt-1">
+                      Agrega su foto o el video en el perfil
+                      (site.decana.video).
+                    </p>
                   </div>
                 </div>
               )}
             </motion.div>
-
           </div>
         </div>
       </section>
@@ -313,7 +371,10 @@ export default function Inicio() {
       <section className="py-16 md:py-20 bg-gray-50">
         <div className="container mx-auto px-4 md:px-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
-            <SectionTitle title="Noticias y **Actualidad**" subtitle={`Últimas novedades, eventos y comunicados del ${site.denominacion}.`} />
+            <SectionTitle
+              title="Noticias y **Actualidad**"
+              subtitle={`Últimas novedades, eventos y comunicados del ${site.denominacion}.`}
+            />
             <Link
               to="/noticias"
               className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:text-gold transition-colors whitespace-nowrap shrink-0"
@@ -347,7 +408,9 @@ export default function Inicio() {
                     </div>
                     <div className="p-6 flex flex-col flex-1">
                       <div className="flex items-center gap-2 mb-3">
-                        <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${noticia.categoriaColor}`}>
+                        <span
+                          className={`text-xs font-bold px-2.5 py-1 rounded-full ${noticia.categoriaColor}`}
+                        >
                           {noticia.categoria}
                         </span>
                         <span className="flex items-center gap-1 text-gray-500 text-xs ml-auto">
@@ -372,8 +435,6 @@ export default function Inicio() {
           </div>
         </div>
       </section>
-
-
 
       {/* ══════════════════════════════════════════
           ACCESOS RÁPIDOS — Índice editorial (rompe la cadencia de tarjetas)
@@ -434,7 +495,6 @@ export default function Inicio() {
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
-            
             {ambientes.map((amb, idx) => (
               <motion.div
                 key={amb.titulo}
@@ -468,7 +528,6 @@ export default function Inicio() {
                 </div>
               </motion.div>
             ))}
-
           </div>
         </div>
       </section>

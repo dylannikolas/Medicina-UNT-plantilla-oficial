@@ -1,12 +1,19 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React from "react";
+import { motion } from "framer-motion";
 
 interface CompetenciaItemProps {
-  competencia: { area: string; descripcion: string };
+  competencia: {
+    area: string;
+    descripcion: string;
+    subcompetencias?: string[];
+  };
   index: number;
 }
 
-export default function CompetenciaItem({ competencia, index }: CompetenciaItemProps) {
+export default function CompetenciaItem({
+  competencia,
+  index,
+}: CompetenciaItemProps) {
   return (
     <motion.div
       initial={{ opacity: 0, x: -20 }}
@@ -19,8 +26,19 @@ export default function CompetenciaItem({ competencia, index }: CompetenciaItemP
         {index + 1}
       </div>
       <div>
-        <h4 className="text-xl font-display font-bold text-primary mb-2">{competencia.area}</h4>
-        <p className="text-gray-600 font-body text-sm leading-relaxed">{competencia.descripcion}</p>
+        <h4 className="text-xl font-display font-bold text-primary mb-2">
+          {competencia.area}
+        </h4>
+        <p className="text-gray-600 font-body text-sm leading-relaxed mb-4">
+          {competencia.descripcion}
+        </p>
+        {competencia.subcompetencias && (
+          <ul className="list-decimal list-inside text-gray-600 font-body text-sm space-y-2">
+            {competencia.subcompetencias.map((item, idx) => (
+              <li key={idx}>{item}</li>
+            ))}
+          </ul>
+        )}
       </div>
     </motion.div>
   );
