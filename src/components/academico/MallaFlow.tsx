@@ -443,15 +443,7 @@ export default function MallaFlow() {
 
       {/* Modal solo en móvil/tablet (sin panel lateral) */}
       {!isDesktop && selectedCourse && (
-<<<<<<< HEAD
-        <div
-          className="fixed inset-0 z-[60] flex items-center justify-center p-4"
-          role="dialog"
-          aria-modal="true"
-        >
-=======
         <div className="fixed inset-0 z-[60] flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-label={`Detalle del curso: ${selectedCourse.name}`}>
->>>>>>> 21767f0898c29971e58ba464da4ba1a40e3908ed
           <button
             type="button"
             aria-label="Cerrar detalle"
